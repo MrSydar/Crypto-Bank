@@ -1,11 +1,12 @@
-package com.example.cryptobank
+package com.example.cryptobank.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.cryptobank.R
 
-class MainActivity : AppCompatActivity() {
+class AllCryptoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_all_crypto)
     }
 }

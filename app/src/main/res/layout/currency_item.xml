@@ -34,7 +34,7 @@
                 android:text="currency: " />
 
             <TextView
-                android:id="@+id/userName"
+                android:id="@+id/currency_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -58,7 +58,7 @@
                 android:text="value: " />
 
             <TextView
-                android:id="@+id/userScore"
+                android:id="@+id/currency_value"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

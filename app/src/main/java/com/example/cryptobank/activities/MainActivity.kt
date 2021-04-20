@@ -1,8 +1,10 @@
 package com.example.cryptobank.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,45 +20,38 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
         setContentView(R.layout.activity_main)
-        loadCurrencies()
-    }
+        val login = findViewById<Button>(R.id.login)
+        val register = findViewById<Button>(R.id.register)
 
-    private fun loadCurrencies() {
-        //initiate the service
-        val destinationService = ServiceBuilder.buildService(ICryptoCurrencyService::class.java)
-        val requestCall = destinationService.getAll()
-        val userRecyler = findViewById<RecyclerView>(R.id.user_recycler)
-        //make network call asynchronously
-        requestCall.enqueue(object : Callback<List<Currency>> {
-            override fun onResponse(
-                call: Call<List<Currency>>,
-                response: Response<List<Currency>>
-            ) {
-                Log.d("Response", "onResponse: ${response.body()}")
-                if (response.isSuccessful) {
-                    val usersList = response.body()!!
-                    Log.d("Response", "countrylist size :")
 
-                    userRecyler.apply {
-                        setHasFixedSize(true)
-                        layoutManager = GridLayoutManager(this@MainActivity, 1)
-                        adapter =
-                            CurrencyAdapter(usersList as MutableList<Currency>, this@MainActivity)
-                    }
-                } else {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Something went wrong ${response.message()}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+        login.setOnClickListener() {
+            Thread() {
+                run {
+                    Thread.sleep(1000);
                 }
-            }
+                runOnUiThread() {
+                    val intent = Intent(this, AllCryptoActivity::class.java)
+                    startActivity(intent)
+                }
+            }.start()
+        }
+        register.setOnClickListener() {
 
-            override fun onFailure(call: Call<List<Currency>>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "Something went wrong $t", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        })
+            Thread() {
+                run {
+
+                    Thread.sleep(1000);
+                }
+                runOnUiThread() {
+                    val intent = Intent(this, RegisterActivity::class.java)
+                    startActivity(intent)
+                }
+            }.start()
+        }
     }
+
 }

@@ -15,16 +15,18 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptobank.R
 import com.example.cryptobank.activities.KontoActivity
+import com.example.cryptobank.database.DBHelper
 import com.example.cryptobank.datamodel.Currency
 
 
 class CurrencyAdapter(
     private val users: MutableList<Currency>, val context: Context
 ) : RecyclerView.Adapter<CurrencyAdapter.messageViewHolder>() {
+    var dbHelper = DBHelper(context)
 
     inner class messageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val currency: TextView = itemView.findViewById<TextView>(R.id.userName);
-        private val price: TextView = itemView.findViewById<TextView>(R.id.userScore);
+        private val currency: TextView = itemView.findViewById<TextView>(R.id.currency_name);
+        private val price: TextView = itemView.findViewById<TextView>(R.id.currency_value   );
 
         fun bind(curUser: Currency) {
             currency.text = curUser.currency
@@ -40,7 +42,7 @@ class CurrencyAdapter(
     }
 
     fun showBuilder(message: String) {
-        var builder = AlertDialog.Builder(context)
+        val builder = AlertDialog.Builder(context)
         builder.setTitle("addCurrency")
         builder.setMessage(message)
         builder.setPositiveButton("OK") { dialog: DialogInterface?, which: Int -> }
@@ -55,14 +57,19 @@ class CurrencyAdapter(
         holder.bind(curUser)
 
         val starIcon: ImageView = holder.itemView.findViewById<ImageView>(R.id.starIcon)
+        val currCurrency = holder.itemView.findViewById<TextView>(R.id.currency_name)
 
-        val plusIcon: ImageView = holder.itemView.findViewById<ImageView>(R.id.starIcon)
+        val plusIcon: ImageView = holder.itemView.findViewById<ImageView>(R.id.plusIcon)
+
         plusIcon.setOnClickListener {
-            Toast.makeText(context, "Plus Clicked", Toast.LENGTH_LONG).show();
+            showBuilder("kek $position")
+//            Toast.makeText(context, "Plus Clicked", Toast.LENGTH_LONG).show();
         }
 
         starIcon.setOnClickListener {
             Toast.makeText(context, "Star Clicked", Toast.LENGTH_LONG).show();
+            val currency = Currency(currCurrency.text as String, "0")
+            dbHelper.addCurrency(currency)
         }
 
         println("clicked id: $position")

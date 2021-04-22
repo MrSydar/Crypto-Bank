@@ -1,5 +1,6 @@
 package com.example.cryptobank.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -34,7 +35,8 @@ class MainActivity : ChangeableActivity() {
                     if (password == realPassword) {
                         changeActivity(KontoActivity::class)
                     } else {
-                        Toast.makeText(applicationContext, "Bad password", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, "Bad password", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 } else {
                     Toast.makeText(applicationContext, "No such user", Toast.LENGTH_SHORT).show()
@@ -57,7 +59,6 @@ class MainActivity : ChangeableActivity() {
         val userLogin = findViewById<EditText>(R.id.loginTextEdit)
         val userPassword = findViewById<EditText>(R.id.passwordLoginTextEdit)
 
-        setContentView(R.layout.activity_main)
         val login = findViewById<Button>(R.id.login)
         val register = findViewById<Button>(R.id.register)
 //        findViewById<Button>(R.id.login).also { img ->
@@ -84,10 +85,10 @@ class MainActivity : ChangeableActivity() {
                         start()
                     }
                 }
-        viewArray.add(loginButton)
-        viewArray.add(registerButton)
-        viewArray.add(userLogin)
-        viewArray.add(userPassword)
+                viewArray.add(loginButton)
+                viewArray.add(registerButton)
+                viewArray.add(userLogin)
+                viewArray.add(userPassword)
 
             }
         }.start()
@@ -107,13 +108,14 @@ class MainActivity : ChangeableActivity() {
                     startActivity(intent)
                 }
             }.start()
-        loginButton.setOnClickListener {
-            signIn(userLogin.text.toString(), userPassword.text.toString())
+            loginButton.setOnClickListener {
+                signIn(userLogin.text.toString(), userPassword.text.toString())
+            }
+
+            registerButton.setOnClickListener {
+                changeActivity(RegisterActivity::class)
+            }
         }
 
-        registerButton.setOnClickListener {
-            changeActivity(RegisterActivity::class)
-        }
     }
-
 }

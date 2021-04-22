@@ -3,8 +3,6 @@ package com.example.cryptobank.adapters
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +12,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptobank.R
-import com.example.cryptobank.activities.KontoActivity
 import com.example.cryptobank.database.DBHelper
 import com.example.cryptobank.datamodel.Currency
 
@@ -25,8 +22,8 @@ class CurrencyAdapter(
     var dbHelper = DBHelper(context)
 
     inner class messageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val currency: TextView = itemView.findViewById<TextView>(R.id.currency_name);
-        private val price: TextView = itemView.findViewById<TextView>(R.id.currency_value   );
+        private val currency: TextView = itemView.findViewById<TextView>(R.id.fav_currency_name);
+        private val price: TextView = itemView.findViewById<TextView>(R.id.fav_currency_value);
 
         fun bind(curUser: Currency) {
             currency.text = curUser.currency
@@ -57,9 +54,9 @@ class CurrencyAdapter(
         holder.bind(curUser)
 
         val starIcon: ImageView = holder.itemView.findViewById<ImageView>(R.id.starIcon)
-        val currCurrency = holder.itemView.findViewById<TextView>(R.id.currency_name)
+        val currCurrency = holder.itemView.findViewById<TextView>(R.id.fav_currency_name)
 
-        val plusIcon: ImageView = holder.itemView.findViewById<ImageView>(R.id.plusIcon)
+        val plusIcon: ImageView = holder.itemView.findViewById<ImageView>(R.id.crossIcon)
 
         plusIcon.setOnClickListener {
             showBuilder("kek $position")
@@ -69,7 +66,7 @@ class CurrencyAdapter(
         starIcon.setOnClickListener {
             Toast.makeText(context, "Star Clicked", Toast.LENGTH_LONG).show();
             val currency = Currency(currCurrency.text as String, "0")
-            dbHelper.addCurrency(currency)
+            dbHelper.addCurrency(currency, "oleg@gmail.com")
         }
 
         println("clicked id: $position")

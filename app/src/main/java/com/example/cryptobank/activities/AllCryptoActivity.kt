@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptobank.R
 import com.example.cryptobank.adapters.CurrencyAdapter
+import com.example.cryptobank.database.DBHelper
 import com.example.cryptobank.datamodel.Currency
 import com.example.cryptobank.services.ICryptoCurrencyService
 import com.example.cryptobank.services.ServiceBuilder
@@ -22,7 +23,9 @@ class AllCryptoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_crypto)
         loadCurrencies()
+
     }
+
 
     private fun loadCurrencies() {
         //initiate the service
@@ -44,7 +47,10 @@ class AllCryptoActivity : AppCompatActivity() {
                         setHasFixedSize(true)
                         layoutManager = GridLayoutManager(this@AllCryptoActivity, 1)
                         adapter =
-                            CurrencyAdapter(usersList as MutableList<Currency>, this@AllCryptoActivity)
+                            CurrencyAdapter(
+                                usersList as MutableList<Currency>,
+                                this@AllCryptoActivity
+                            )
                     }
                 } else {
                     Toast.makeText(
@@ -56,7 +62,11 @@ class AllCryptoActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<Currency>>, t: Throwable) {
-                Toast.makeText(this@AllCryptoActivity, "Something went wrong $t", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    this@AllCryptoActivity,
+                    "Something went wrong $t",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
         })

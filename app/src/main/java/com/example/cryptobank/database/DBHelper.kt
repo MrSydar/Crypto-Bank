@@ -15,12 +15,13 @@ class DBHelper(var context: Context) : SQLiteOpenHelper(
     null, DATABASE_VER
 ) {
     companion object {
-        private val DATABASE_VER = 1
+        private val DATABASE_VER = 3
         private val DATABASE_NAME = "main.db"
 
         private val TABLE_NAME = "FavoriteCurrencies"
-        private val COL_ID = "userID"
-        private val COL_CURRENCY = "userName"
+        private val COL_ID = "favID"
+        private val COL_CURRENCY = "usersCrypto"
+        private val COL_EMAIL = "userEmail  "
 //        private val COL_PASSWORD = "password"
 //        private val COL_USER_SCORE = "userScore"
 
@@ -28,7 +29,7 @@ class DBHelper(var context: Context) : SQLiteOpenHelper(
 
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_TABLE_QUERY =
-            ("CREATE TABLE $TABLE_NAME ($COL_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COL_CURRENCY TEXT UNIQUE )")
+            ("CREATE TABLE $TABLE_NAME ($COL_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COL_CURRENCY TEXT UNIQUE, $COL_EMAIL TEXT )")
         db!!.execSQL(CREATE_TABLE_QUERY)
     }
 
@@ -115,11 +116,12 @@ class DBHelper(var context: Context) : SQLiteOpenHelper(
         return list
     }
 
-    fun addCurrency(currency: Currency) {
+    fun addCurrency(currency: Currency, userEmail: String) {
         val db = this.writableDatabase
         val values = ContentValues()
 //        values.put(COL_ID,null)
         values.put(COL_CURRENCY, currency.currency)
+        values.put(COL_EMAIL, userEmail)
 //        values.put(COL_USERNAME, user.userName)
 //        values.put(COL_PASSWORD, user.password)
 //        values.put(COL_USER_SCORE, user.userScore)

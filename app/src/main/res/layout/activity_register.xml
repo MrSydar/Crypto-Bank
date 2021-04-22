@@ -18,34 +18,38 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/loginTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:rotationX="0"
-            android:text="email" />
+            android:text="@string/email" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/loginTextEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/passwordLoginTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:rotationX="0"
-            android:text="password" />
+            android:text="@string/password" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/passwordLoginTextEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor" />
 
         <TextView
             android:id="@+id/textView2"
@@ -53,23 +57,25 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:rotationX="0"
-            android:text="password" />
+            android:text="@string/password_confirm" />
 
         <EditText
             android:id="@+id/editTextTextPassword2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor" />
 
         <Button
             android:id="@+id/register"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="register" />
+            android:text="@string/register" />
 
     </LinearLayout>
 

@@ -15,7 +15,7 @@ import com.example.cryptobank.datamodel.Currency
 class KontoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_konto)
+        setContentView(R.layout.activity_account)
         val crypto = findViewById<Button>(R.id.crypto)
         crypto.setOnClickListener {
             Thread() {

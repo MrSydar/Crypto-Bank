@@ -46,44 +46,17 @@ class MainActivity : ChangeableActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
         val loginButton = findViewById<Button>(R.id.login)
         val registerButton = findViewById<Button>(R.id.register)
 
-        val userLogin = findViewById<EditText>(R.id.editTextTextEmailAddress)
-        val userPassword = findViewById<EditText>(R.id.editTextTextPassword)
+        val userLogin = findViewById<EditText>(R.id.loginTextEdit)
+        val userPassword = findViewById<EditText>(R.id.passwordLoginTextEdit)
 
         viewArray.add(loginButton)
         viewArray.add(registerButton)
         viewArray.add(userLogin)
         viewArray.add(userPassword)
-
-        ////////////////////////////////////////
-        //        val user: MutableMap<String, Any> = HashMap()
-        //        user["login"] = "werew"
-        //        user["password"] = "asd12345"
-        //        db.collection("users")
-        //            .add(user)
-        //            .addOnSuccessListener { documentReference ->
-        //                Log.d(
-        //                    "MainActivity",
-        //                    "DocumentSnapshot added with ID: " + documentReference.id
-        //                )
-        //            }
-        //            .addOnFailureListener { e -> Log.w("MainActivity", "Error adding document", e) }
-        //
-        //        db.collection("users")
-        //            .get()
-        //            .addOnCompleteListener { task ->
-        //                if (task.isSuccessful) {
-        //                    for (document in task.result!!) {
-        //                        Log.d("MainActivity", document.id + " => " + document.data)
-        //                    }
-        //                } else {
-        //                    Log.w("MainActivity", "Error getting documents.", task.exception)
-        //                }
-        //            }
-        ////////////////////////////////////////
 
         loginButton.setOnClickListener {
             signIn(userLogin.text.toString(), userPassword.text.toString())

@@ -44,8 +44,8 @@ class RegisterActivity : ChangeableActivity() {
         setContentView(R.layout.activity_register)
 
         val registerButton = findViewById<Button>(R.id.register)
-        val loginEditor = findViewById<EditText>(R.id.editTextTextEmailAddress)
-        val passwordEditor = findViewById<EditText>(R.id.editTextTextPassword)
+        val loginEditor = findViewById<EditText>(R.id.loginTextEdit)
+        val passwordEditor = findViewById<EditText>(R.id.passwordLoginTextEdit)
         val passwordConfirmEditor = findViewById<EditText>(R.id.editTextTextPassword2)
 
         viewArray.add(loginEditor)

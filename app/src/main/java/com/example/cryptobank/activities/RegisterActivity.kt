@@ -26,7 +26,7 @@ class RegisterActivity : ChangeableActivity() {
                     val document = fdb.collection("users").document(login)
                     val data = hashMapOf("password" to password)
                     document.set(data, SetOptions.merge()).addOnSuccessListener {
-                        changeActivity(KontoActivity::class)
+                        changeActivity(MainActivity::class)
                     }
                 } else {
                     Toast.makeText(applicationContext, "User exists", Toast.LENGTH_SHORT).show()
@@ -55,9 +55,9 @@ class RegisterActivity : ChangeableActivity() {
 
         registerButton.setOnClickListener {
             registerUser(
-                    loginEditor.text.toString(),
-                    passwordEditor.text.toString(),
-                    passwordConfirmEditor.text.toString()
+                loginEditor.text.toString(),
+                passwordEditor.text.toString(),
+                passwordConfirmEditor.text.toString()
             )
         }
     }

@@ -101,10 +101,11 @@ class DBHelper(var context: Context) : SQLiteOpenHelper(
 //    }
 
 
-    fun getFavoriteCurrencies(): MutableList<Currency> {
+    fun getFavoriteCurrencies(userEmail: String): MutableList<Currency> {
         val list: MutableList<Currency> = ArrayList()
         val db = this.readableDatabase
-        val query = "Select * from $TABLE_NAME ORDER BY $COL_ID DESC LIMIT 10"
+        val query =
+            "Select * from $TABLE_NAME WHERE $COL_EMAIL LIKE \"$userEmail\" ORDER BY $COL_ID DESC LIMIT 10"
         val result = db.rawQuery(query, null)
         if (result.moveToFirst()) {
             do {

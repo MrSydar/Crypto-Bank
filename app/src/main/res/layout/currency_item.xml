@@ -55,7 +55,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="value[USD]: " />
+                android:text="[USD]: " />
 
             <TextView
                 android:id="@+id/fav_currency_value"

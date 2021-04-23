@@ -1,9 +1,11 @@
 package com.example.cryptobank.activities
 
 import android.content.DialogInterface
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,10 +20,25 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AllCryptoActivity : AppCompatActivity() {
+class AllCryptoActivity : ChangeableActivity() {
+
+    var loggedUser: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_crypto)
+
+        val backButtonView = findViewById<ImageView>(R.id.back_to_account)
+        loggedUser = intent.extras!!.getString("userIN")
+        loggedUser?.let {
+            println("all crypto $loggedUser")
+
+
+        }
+
+        backButtonView.setOnClickListener {
+
+            changeActivity(AccountActivity::class, loggedUser)
+        }
         loadCurrencies()
 
     }
@@ -47,10 +64,12 @@ class AllCryptoActivity : AppCompatActivity() {
                         setHasFixedSize(true)
                         layoutManager = GridLayoutManager(this@AllCryptoActivity, 1)
                         adapter =
-                            CurrencyAdapter(
-                                usersList as MutableList<Currency>,
-                                this@AllCryptoActivity
-                            )
+                            loggedUser?.let {
+                                CurrencyAdapter(
+                                    usersList as MutableList<Currency>,
+                                    this@AllCryptoActivity, it
+                                )
+                            }
                     }
                 } else {
                     Toast.makeText(

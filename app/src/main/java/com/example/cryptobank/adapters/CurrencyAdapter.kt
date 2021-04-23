@@ -17,7 +17,7 @@ import com.example.cryptobank.datamodel.Currency
 
 
 class CurrencyAdapter(
-    private val users: MutableList<Currency>, val context: Context
+    private val users: MutableList<Currency>, val context: Context, val loggedUser: String
 ) : RecyclerView.Adapter<CurrencyAdapter.messageViewHolder>() {
     var dbHelper = DBHelper(context)
 
@@ -66,7 +66,7 @@ class CurrencyAdapter(
         starIcon.setOnClickListener {
             Toast.makeText(context, "Star Clicked", Toast.LENGTH_LONG).show();
             val currency = Currency(currCurrency.text as String, "0")
-            dbHelper.addCurrency(currency, "oleg@gmail.com")
+            dbHelper.addCurrency(currency, loggedUser)
         }
 
         println("clicked id: $position")

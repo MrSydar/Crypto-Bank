@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoBank">
-        <activity android:name=".activities.KontoActivity" />
+        <activity android:name=".activities.AccountActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.AllCryptoActivity" />
         <activity android:name=".activities.MainActivity">

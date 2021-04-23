@@ -1,5 +1,6 @@
 package com.example.cryptobank.activities
 
+import android.accounts.Account
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -7,8 +8,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.dynamicanimation.animation.SpringAnimation
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptobank.R
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -33,7 +32,8 @@ class MainActivity : ChangeableActivity() {
                 if (doc!!.exists()) {
                     val realPassword: String = doc.get("password").toString()
                     if (password == realPassword) {
-                        changeActivity(KontoActivity::class)
+                        enableUI(true)
+                        changeActivity(AccountActivity::class, login)
                     } else {
                         Toast.makeText(applicationContext, "Bad password", Toast.LENGTH_SHORT)
                             .show()
@@ -92,30 +92,20 @@ class MainActivity : ChangeableActivity() {
 
             }
         }.start()
+
         val springAnim = findViewById<Button>(R.id.login).let { img ->
             // Setting up a spring animation to animate the view’s translationY property with the final
             // spring position at 0.
             SpringAnimation(img, DynamicAnimation.TRANSLATION_Y, 0f)
         }
-        login.setOnClickListener() {
-            Thread() {
-                run {
-                    Thread.sleep(1000);
-                }
-                runOnUiThread() {
-                    val intent = Intent(this, KontoActivity::class.java)
 
-                    startActivity(intent)
-                }
-            }.start()
-            loginButton.setOnClickListener {
-                signIn(userLogin.text.toString(), userPassword.text.toString())
-            }
-
-            registerButton.setOnClickListener {
-                changeActivity(RegisterActivity::class)
-            }
+        loginButton.setOnClickListener {
+            signIn(userLogin.text.toString(), userPassword.text.toString())
         }
 
+        registerButton.setOnClickListener {
+            changeActivity(RegisterActivity::class)
+        }
     }
+
 }

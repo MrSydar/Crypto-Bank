@@ -1,8 +1,10 @@
 package com.example.cryptobank.activities
 
 import android.accounts.Account
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -47,7 +49,11 @@ class MainActivity : ChangeableActivity() {
 
             enableUI(true)
         }
+
     }
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

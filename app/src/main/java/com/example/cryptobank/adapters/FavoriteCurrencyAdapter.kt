@@ -16,12 +16,13 @@ import com.example.cryptobank.database.DBHelper
 import com.example.cryptobank.datamodel.Currency
 
 class FavoriteCurrencyAdapter(
-    private val users: MutableList<Currency>, val context: Context
+    private val users: MutableList<Currency>, val context: Context, val loggedUser: String
 ) : RecyclerView.Adapter<FavoriteCurrencyAdapter.messageViewHolder>() {
     var dbHelper = DBHelper(context)
 
     inner class messageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val currency: TextView = itemView.findViewById<TextView>(R.id.remote_currency_name);
+        private val currency: TextView =
+            itemView.findViewById<TextView>(R.id.favorite_currency_name);
         private val price: TextView = itemView.findViewById<TextView>(R.id.remote_currency_value);
 
         fun bind(curUser: Currency) {
@@ -38,46 +39,21 @@ class FavoriteCurrencyAdapter(
         )
     }
 
-    fun showBuilder(message: String) {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle("addCurrency")
-        builder.setMessage(message)
-        builder.setPositiveButton("OK") { dialog: DialogInterface?, which: Int -> }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
     override fun onBindViewHolder(holder: messageViewHolder, position: Int) {
         val curUser = users[position]
-
-        val activity = holder.itemView.context as Activity
         holder.bind(curUser)
         val crossIcon: ImageView = holder.itemView.findViewById<ImageView>(R.id.crossIcon)
-//        val currCurrency = holder.itemView.findViewById<TextView>(R.id.fav_currency_name)
-//
-//        val plusIcon: ImageView = holder.itemView.findViewById<ImageView>(R.id.plusIcon)
-
-//        plusIcon.setOnClickListener {
-//            showBuilder("kek $position")
-////            Toast.makeText(context, "Plus Clicked", Toast.LENGTH_LONG).show();
-//        }
-//
+        val currCurrency = holder.itemView.findViewById<TextView>(R.id.favorite_currency_name)
         crossIcon.setOnClickListener {
             Toast.makeText(context, "Cross Clicked", Toast.LENGTH_LONG).show();
-            removeAt(position)
-//            val currency = Currency(currCurrency.text as String, "0")
-//            dbHelper.addCurrency(currency, "oleg@gmail.com")
+            dbHelper.deleteRowFromTable(loggedUser, currCurrency.text.toString())
+            removeAt(position + 1)
         }
-
-        println("clicked id: $position")
-
     }
 
     fun removeAt(position: Int) {
-//        mDataset.remove(position);
-        users.removeAt(position-1)
+        users.removeAt(position - 1)
         notifyItemRemoved(position);
-//        notifyItemRangeChanged(position, mDataSet.size());
     }
 
 

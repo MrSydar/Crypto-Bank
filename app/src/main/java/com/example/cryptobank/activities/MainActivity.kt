@@ -53,8 +53,6 @@ class MainActivity : ChangeableActivity() {
     }
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -67,18 +65,12 @@ class MainActivity : ChangeableActivity() {
 
         val login = findViewById<Button>(R.id.login)
         val register = findViewById<Button>(R.id.register)
-//        findViewById<Button>(R.id.login).also { img ->
-//            SpringAnimation(img, DynamicAnimation.TRANSLATION_X, -110f).apply {
-//                //Starting the animation
-//                start()
-//            }
-//        }
+        // Animation Purpose Thread
         Thread() {
             run {
                 Thread.sleep(3000);
             }
             runOnUiThread() {
-//                Thread.sleep(7000);
                 findViewById<Button>(R.id.login).also { img ->
                     SpringAnimation(img, DynamicAnimation.TRANSLATION_X, -110f).apply {
                         //Starting the animation
@@ -99,11 +91,6 @@ class MainActivity : ChangeableActivity() {
             }
         }.start()
 
-        val springAnim = findViewById<Button>(R.id.login).let { img ->
-            // Setting up a spring animation to animate the view’s translationY property with the final
-            // spring position at 0.
-            SpringAnimation(img, DynamicAnimation.TRANSLATION_Y, 0f)
-        }
 
         loginButton.setOnClickListener {
             signIn(userLogin.text.toString(), userPassword.text.toString())

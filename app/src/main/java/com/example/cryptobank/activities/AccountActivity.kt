@@ -95,10 +95,12 @@ class AccountActivity : ChangeableActivity() {
                 setHasFixedSize(true)
                 layoutManager = GridLayoutManager(this@AccountActivity, 1)
                 adapter =
-                    FavoriteCurrencyAdapter(
-                        favoriteCurrencies as MutableList<Currency>,
-                        this@AccountActivity
-                    )
+                    loggedUser?.let { it1 ->
+                        FavoriteCurrencyAdapter(
+                            favoriteCurrencies as MutableList<Currency>,
+                            this@AccountActivity, it1
+                        )
+                    }
             }
         }
 

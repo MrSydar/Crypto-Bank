@@ -1,8 +1,6 @@
 package com.example.cryptobank.adapters
 
-import android.app.Activity
 import android.content.Context
-import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,37 +17,24 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 class CurrencyAdapter(
-    private val users: MutableList<Currency>, val context: Context, val loggedUser: String
-) : RecyclerView.Adapter<CurrencyAdapter.messageViewHolder>() {
-    var dbHelper = DBHelper(context)
+    private val users: MutableList<Currency>, private val context: Context, private val loggedUser: String) : RecyclerView.Adapter<CurrencyAdapter.MessageViewHolder>() {
+    private var dbHelper = DBHelper(context)
 
-    inner class messageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val currency: TextView =
-            itemView.findViewById<TextView>(R.id.favorite_currency_name);
-        private val price: TextView = itemView.findViewById<TextView>(R.id.remote_currency_value);
+    inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val currency: TextView = itemView.findViewById(R.id.favorite_currency_name)
+        private val price: TextView = itemView.findViewById(R.id.remote_currency_value)
 
         fun bind(curUser: Currency) {
             currency.text = curUser.currency
             price.text = curUser.price
         }
-
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): messageViewHolder {
-        return messageViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
+        return MessageViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.currency_item, parent, false)
         )
-    }
-
-    fun showBuilder(message: String) {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle("addCurrency")
-        builder.setMessage(message)
-        builder.setPositiveButton("OK") { dialog: DialogInterface?, which: Int -> }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
     }
 
     private fun showAlertWithTextInputLayout(currCurrency: Currency) {
@@ -71,7 +56,7 @@ class CurrencyAdapter(
             .setTitle("Add Currency")
             .setView(textInputLayout)
             .setMessage("Please enter of currency in USD")
-            //Adding to Values to Database
+
             .setPositiveButton("Submit") { dialog, _ ->
                 println("${textInputLayout.editText} editText")
 
@@ -89,15 +74,15 @@ class CurrencyAdapter(
         alert.show()
     }
 
-    override fun onBindViewHolder(holder: messageViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val curUser = users[position]
 
         holder.bind(curUser)
 
-        val starIcon: ImageView = holder.itemView.findViewById<ImageView>(R.id.starIcon)
+        val starIcon: ImageView = holder.itemView.findViewById(R.id.starIcon)
         val currCurrency = holder.itemView.findViewById<TextView>(R.id.favorite_currency_name)
         val currCurrencyVal = holder.itemView.findViewById<TextView>(R.id.remote_currency_value)
-        val plusIcon: ImageView = holder.itemView.findViewById<ImageView>(R.id.crossIcon)
+        val plusIcon: ImageView = holder.itemView.findViewById(R.id.crossIcon)
 
         plusIcon.setOnClickListener {
             showAlertWithTextInputLayout(

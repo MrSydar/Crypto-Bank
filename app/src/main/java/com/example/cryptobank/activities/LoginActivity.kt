@@ -1,19 +1,17 @@
 package com.example.cryptobank.activities
 
-import android.accounts.Account
-import android.content.Context
-import android.content.Intent
+import android.animation.ValueAnimator
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.dynamicanimation.animation.DynamicAnimation
-import androidx.dynamicanimation.animation.SpringAnimation
 import com.example.cryptobank.R
 import com.google.firebase.firestore.FirebaseFirestore
 
-class MainActivity : ChangeableActivity() {
+
+class LoginActivity : ChangeableActivity() {
     private fun isGoodString(str: String): Boolean {
         return !(str.isEmpty() || str.isBlank())
     }
@@ -52,6 +50,18 @@ class MainActivity : ChangeableActivity() {
 
     }
 
+    private fun prepareHeightAnimation(view: View) : ValueAnimator {
+        val animation = ValueAnimator.ofInt(view.measuredHeight, 100)
+        animation.addUpdateListener { valueAnimator ->
+            val currentValue = valueAnimator.animatedValue as Int
+            val layoutParams: ViewGroup.LayoutParams = view.layoutParams
+            layoutParams.height = currentValue
+            view.layoutParams = layoutParams
+        }
+        animation.duration = 500
+
+        return animation
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,41 +73,22 @@ class MainActivity : ChangeableActivity() {
         val userLogin = findViewById<EditText>(R.id.loginTextEdit)
         val userPassword = findViewById<EditText>(R.id.passwordLoginTextEdit)
 
-        val login = findViewById<Button>(R.id.login)
-        val register = findViewById<Button>(R.id.register)
-        // Animation Purpose Thread
-        Thread() {
-            run {
-                Thread.sleep(3000);
-            }
-            runOnUiThread() {
-                findViewById<Button>(R.id.login).also { img ->
-                    SpringAnimation(img, DynamicAnimation.TRANSLATION_X, -110f).apply {
-                        //Starting the animation
-                        start()
-                    }
-                }
-                findViewById<Button>(R.id.register).also { img ->
-                    SpringAnimation(img, DynamicAnimation.TRANSLATION_X, 110f).apply {
-                        //Starting the animation
-                        start()
-                    }
-                }
-                viewArray.add(loginButton)
-                viewArray.add(registerButton)
-                viewArray.add(userLogin)
-                viewArray.add(userPassword)
-
-            }
-        }.start()
-
-
         loginButton.setOnClickListener {
             signIn(userLogin.text.toString(), userPassword.text.toString())
         }
 
         registerButton.setOnClickListener {
             changeActivity(RegisterActivity::class)
+        }
+
+        val animation = prepareHeightAnimation(findViewById(R.id.loginButtonContainer))
+        runOnUiThread {
+            Thread {
+                Thread.sleep(1000)
+                runOnUiThread {
+                    animation.start()
+                }
+            }.start()
         }
     }
 

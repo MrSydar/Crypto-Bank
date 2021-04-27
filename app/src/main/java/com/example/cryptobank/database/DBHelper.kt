@@ -29,7 +29,7 @@ class DBHelper(var context: Context) : SQLiteOpenHelper(
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
-        onCreate(db!!)
+        onCreate(db)
     }
 
     fun deleteRowFromTable(email: String, currencyName: String) {
@@ -52,6 +52,7 @@ class DBHelper(var context: Context) : SQLiteOpenHelper(
                 list.add(currency)
             } while (result.moveToNext())
         }
+        result.close()
         db.close()
         return list
     }
@@ -62,7 +63,7 @@ class DBHelper(var context: Context) : SQLiteOpenHelper(
         values.put(COL_CURRENCY, currency.currency)
         values.put(COL_EMAIL, userEmail)
 
-        var result = db.insert(TABLE_NAME, null, values)
+        val result = db.insert(TABLE_NAME, null, values)
         if (result == (0).toLong()) {
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
         } else {

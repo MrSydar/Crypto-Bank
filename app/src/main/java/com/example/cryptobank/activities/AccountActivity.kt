@@ -1,8 +1,7 @@
 package com.example.cryptobank.activities
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -16,23 +15,24 @@ import com.example.cryptobank.datamodel.Currency
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AccountActivity : ChangeableActivity() {
-    var loggedUser: String? = null
+    private var loggedUser: String? = null
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account)
         val crypto = findViewById<Button>(R.id.crypto)
         loggedUser = intent.extras!!.getString("userIN")
         val loggedUserView = findViewById<TextView>(R.id.loggedUser)
-        loggedUserView.text = loggedUser
+        loggedUserView.text = "Hello, $loggedUser"
         crypto.setOnClickListener {
             changeActivity(AllCryptoActivity::class, loggedUser)
         }
-        loadFavoriteLocal()
 
+        loadFavoriteLocal()
         loadRemoteValues()
     }
 
-
+    @Suppress("UNCHECKED_CAST")
     private fun loadRemoteValues() {
         val favoriteCurrencies: MutableList<Currency> =
             ArrayList()
@@ -41,32 +41,26 @@ class AccountActivity : ChangeableActivity() {
             if (task.isSuccessful) {
                 val doc = task.result
                 if (doc!!.exists()) {
-                    val currencyVal: ArrayList<HashMap<String, String>>? =
-                        doc.get("currencies") as ArrayList<HashMap<String, String>>?
-                    println("before")
-                    println(currencyVal)
+                    val currencyVal = doc.get("currencies") as ArrayList<HashMap<String, String>>?
+
                     currencyVal?.let {
                         for (elem in currencyVal) {
                             favoriteCurrencies.add(
                                 Currency(
-                                    elem.get("currency")!!,
-                                    elem.get("price")!!
+                                    elem["currency"]!!,
+                                    elem["price"]!!
                                 )
                             )
                         }
                     }
 
-
-                    val favoriteCurrencyRecycler =
-                        findViewById<RecyclerView>(R.id.currency_recycler)
+                    val favoriteCurrencyRecycler = findViewById<RecyclerView>(R.id.currency_recycler)
                     favoriteCurrencyRecycler.apply {
                         setHasFixedSize(true)
                         layoutManager = GridLayoutManager(this@AccountActivity, 1)
-                        adapter =
-                            RemoteCurrencyAdapter(
-                                favoriteCurrencies as MutableList<Currency>,
-                                this@AccountActivity
-                            )
+                        adapter = RemoteCurrencyAdapter(
+                            favoriteCurrencies
+                        )
                     }
                 }
             } else {
@@ -90,14 +84,13 @@ class AccountActivity : ChangeableActivity() {
         }
 
         favoriteCurrencies?.let {
-            println(favoriteCurrencies)
             favoriteCurrencyRecycler.apply {
                 setHasFixedSize(true)
                 layoutManager = GridLayoutManager(this@AccountActivity, 1)
                 adapter =
                     loggedUser?.let { it1 ->
                         FavoriteCurrencyAdapter(
-                            favoriteCurrencies as MutableList<Currency>,
+                            favoriteCurrencies,
                             this@AccountActivity, it1
                         )
                     }

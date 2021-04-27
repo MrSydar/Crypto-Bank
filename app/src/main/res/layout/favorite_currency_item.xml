@@ -4,71 +4,48 @@
     android:id="@+id/list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="20dp">
+    <TextView
+        android:id="@+id/favCurr"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/currency" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+    <TextView
+        android:id="@+id/remote_currency_value"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#006EC14B"
+        android:gravity="center"
+        android:text="@string/_0" />
 
-            <TextView
-                android:id="@+id/favCurr"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="currency: " />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/usd" />
 
-            <TextView
-                android:id="@+id/favorite_currency_name"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="0" />
+    <TextView
+        android:id="@+id/favorite_currency_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/_0" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="value[USD]: " />
-
-            <TextView
-                android:id="@+id/remote_currency_value"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#006EC14B"
-                android:gravity="center"
-                android:text="0" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/crossIcon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_weight="0.01"
-            app:srcCompat="@android:drawable/btn_dialog" />
-
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/crossIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="0.01"
+        app:srcCompat="@android:drawable/btn_dialog"
+        android:contentDescription="@string/todo" />
 
 
 </LinearLayout>

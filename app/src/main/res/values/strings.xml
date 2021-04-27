@@ -5,4 +5,14 @@
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="password_confirm">confirm password</string>
+    <string name="exchange_rate">EXCHANGE RATE</string>
+    <string name="crypto">crypto</string>
+    <string name="wallet">Wallet</string>
+    <string name="favorites">FAVORITES</string>
+    <string name="show_exchange_rate">SHOW EXCHANGE RATE</string>
+    <string name="your_wallet">YOUR WALLET</string>
+    <string name="currency">currency:</string>
+    <string name="usd">USD:</string>
+    <string name="_0">0</string>
+    <string name="todo">TODO</string>
 </resources>

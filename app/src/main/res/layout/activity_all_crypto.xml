@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,8 @@
                 android:id="@+id/back_to_account"
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/abc_vector_test" />
+                app:srcCompat="@drawable/abc_vector_test"
+                android:contentDescription="@string/todo" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -30,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="All Crypto" />
+                android:text="@string/exchange_rate" />
 
         </androidx.cardview.widget.CardView>
 

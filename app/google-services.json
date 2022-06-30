@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "1021394860694",
-    "firebase_url": "https://cryptobank-7180c-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "cryptobank-7180c",
-    "storage_bucket": "cryptobank-7180c.appspot.com"
+    "project_number": "425338954460",
+    "project_id": "cryptobank-3768f",
+    "storage_bucket": "cryptobank-3768f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1021394860694:android:5a1367e1a2d6821b76e0b7",
+        "mobilesdk_app_id": "1:425338954460:android:4c0a9b10c07e4901fa4a19",
         "android_client_info": {
           "package_name": "com.example.cryptobank"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1021394860694-qk8fml1ij1d1bqnr8qvf880i99vvffit.apps.googleusercontent.com",
+          "client_id": "425338954460-aa4q6v5rs1ntetachosjdfau94vkpf34.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDSAL9dRuSxrr1HbMtRmSRYUqQ0KD-4woo"
+          "current_key": "AIzaSyDmqIXaK3SF79QII8x-68ucwwM356AxHPc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1021394860694-qk8fml1ij1d1bqnr8qvf880i99vvffit.apps.googleusercontent.com",
+              "client_id": "425338954460-aa4q6v5rs1ntetachosjdfau94vkpf34.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
